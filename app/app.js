@@ -1,14 +1,15 @@
-var app = require('app');
-var Menu = require('menu');
-var Tray = require('tray');
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
+var electron = require('electron');
+var app = electron.app;
+var Menu = electron.Menu;
+var Tray = electron.Tray;
+var BrowserWindow = electron.BrowserWindow;
 var mainWindow = null;
 
 win = null; // make it global so app_menu.js can see it
 
 // workaround
 var fs = require('fs');
-var cacheFile = app.getDataPath()+"/Application Cache/Index";
+var cacheFile = app.getPath("appData")+"/Application Cache/Index";
 try{
   fs.unlinkSync(cacheFile);
 }catch(e){}
@@ -49,9 +50,7 @@ function appInit () {
   });
 
   // Load the app page
-  win.loadUrl('https://paper.dropbox.com/?role=personal', {
-    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.52 Safari/537.36'
-  });
+  win.loadURL('https://paper.dropbox.com/?role=personal');
 
   // Open links externally
   win.webContents.on("new-window", function(event, url, frameName, disposition){
