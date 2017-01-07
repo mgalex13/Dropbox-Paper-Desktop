@@ -54,7 +54,7 @@ function appInit () {
 
   // Open links externally
   win.webContents.on("new-window", function(event, url, frameName, disposition){
-    require('shell').openExternal(url)
+    electron.shell.openExternal(url)
     event.preventDefault();
   });
 
